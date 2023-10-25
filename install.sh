@@ -2,7 +2,7 @@
 #
 #   Prepare
 #
-DOCKER_CMD="dkr"
+DOCKER_CMD="docker-compose"
 
 #
 #   Mongodb
@@ -24,6 +24,7 @@ chmod +x ./sample/mssql/import.sh
 $DOCKER_CMD up -d mssql
 sleep 20
 $DOCKER_CMD exec mssql /mssql-samples/import.sh
+$DOCKER_CMD down
 
 #
 #   Postgres 1
@@ -35,6 +36,7 @@ chmod +x ./sample/postgres1/import.sh
 $DOCKER_CMD up -d postgres1
 sleep 20
 $DOCKER_CMD exec postgres1 /postgres1-samples/import.sh
+$DOCKER_CMD down
 
 #
 #   Postgres 2
@@ -46,3 +48,4 @@ chmod +x ./sample/postgres2/import.sh
 $DOCKER_CMD up -d postgres2
 sleep 20
 $DOCKER_CMD exec postgres2 /postgres2-samples/import.sh
+$DOCKER_CMD down
