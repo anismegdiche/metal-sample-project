@@ -1,0 +1,47 @@
+version: '2'
+services:
+  mongodb:
+    image: mongo
+    hostname: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb:/data/db
+      - ./sample/mongodb/sample_mflix:/mongodb-samples
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    hostname: mssql
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Azerty123!"
+    volumes:
+      - ./mssql:/var/opt/mssql
+      - ./sample/mssql:/mssql-samples
+  postgres1:
+    image: postgres
+    hostname: postgres1
+    ports:
+      - "5432:5432"
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./postgres1:/var/lib/postgresql/data/pgdata
+      - ./sample/postgres1:/postgres1-samples
+  postgres2:
+    image: postgres
+    hostname: postgres2
+    ports:
+      - "5433:5432"
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./postgres2:/var/lib/postgresql/data/pgdata
+      - ./sample/postgres2:/postgres2-samples
