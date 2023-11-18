@@ -1,6 +1,11 @@
 #!/bin/bash
 
 #
+#   Metal Server
+#
+docker-compose build metal
+
+#
 #   Mongodb
 #
 
@@ -45,3 +50,6 @@ docker-compose up -d postgres2
 sleep 20
 docker-compose exec postgres2 /postgres2-samples/import.sh
 docker-compose down
+
+# Start the stack
+docker-compose up -d
