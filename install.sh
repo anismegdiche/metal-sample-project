@@ -1,5 +1,9 @@
 #!/bin/bash
 
+check_logs() {
+    docker-compose logs $1 | grep -q "$2"
+}
+
 #
 #   Metal Server
 #
@@ -11,7 +15,10 @@ docker-compose build metal
 
 chmod +x ./sample/mdb-mflix/sample_mflix/import.sh
 docker-compose up -d mdb-mflix
-sleep 20
+while ! check_logs "mdb-mflix" "Index build: done building" ; do
+    echo "Waiting..."
+    sleep 5
+done
 docker-compose exec mdb-mflix /mdb-mflix-samples/import.sh
 
 #
@@ -22,29 +29,39 @@ chmod 777 ms-hr
 chmod +x ./sample/ms-hr/import.sh
 
 docker-compose up -d ms-hr
-sleep 30
+while ! check_logs "ms-hr" "Recovery is complete" ; do
+    echo "Waiting..."
+    sleep 5
+done
+sleep 5
 docker-compose exec ms-hr /ms-hr-samples/import.sh
 
 #
-#   Postgres 1
+#   Postgres (northwind)
 #
 mkdir -p pg-northwind
 chown 999:0 pg-northwind
 chmod +x ./sample/pg-northwind/import.sh
 
 docker-compose up -d pg-northwind
-sleep 20
+while ! check_logs "pg-northwind" "database system is ready to accept connections" ; do
+    echo "Waiting..."
+    sleep 5
+done
 docker-compose exec pg-northwind /pg-northwind-samples/import.sh
 
 #
-#   Postgres 2
+#   Postgres (clubdata)
 #
 mkdir -p pg-clubdata
 chown 999:0 pg-clubdata
 chmod +x ./sample/pg-clubdata/import.sh
 
 docker-compose up -d pg-clubdata
-sleep 20
+while ! check_logs "pg-clubdata" "database system is ready to accept connections" ; do
+    echo "Waiting..."
+    sleep 5
+done
 docker-compose exec pg-clubdata /pg-clubdata-samples/import.sh
 
 # Start the stack
