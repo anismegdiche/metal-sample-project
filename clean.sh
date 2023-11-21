@@ -1,3 +1,3 @@
 #!/bin/bash
 docker-compose down
-rm -rf mssql mongodb postgres1 postgres2
+rm -rf ms-hr mdb-mflix pg-northwind pg-clubdata

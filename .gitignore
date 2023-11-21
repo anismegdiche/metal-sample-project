@@ -1,4 +1,4 @@
-mongodb/*
-mssql/*
-postgres1/*
-postgres2/*
+mdb-mflix/*
+ms-hr/*
+pg-northwind/*
+pg-clubdata/*

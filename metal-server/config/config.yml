@@ -2,14 +2,12 @@ version: "0.1"
 server:
     port: 3000
     verbosity: debug
-    timezone: UTC # ROADMAP: set TZ for jobs
+    timezone: UTC
     authentication:
-    #     provider: local # ROADMAP select other providers
-    #     enable_multiple_login: true | false  # ROADMAP enable/disable multiple login per user
     request-limit: 100mb
     cache:
         provider: mongodb
-        host: mongodb://mongodb:27017/
+        host: mongodb://mdb-mflix:27017/
         database: metal_cache
         options:
             connectTimeoutMS: 5000
@@ -20,108 +18,75 @@ users:
     guest: "654321"
 
 sources:
-    mssql:
+    ms-hr:
         provider: mssql
-        host: mssql
+        host: ms-hr
         port: 1433
         user: sa
         password: Azerty123!
         database: hr
-    mongo:
+    mdb-mflix:
         provider: mongodb
-        host: mongodb://mongodb:27017/
+        host: mongodb://mdb-mflix:27017/
         database: mflix
         options:
             connectTimeoutMS: 5000
             serverSelectionTimeoutMS: 5000
-    postgres1:
+    pg-northwind:
         provider: postgres
-        host: postgres1
+        host: pg-northwind
         port: 5432
         user: admin
         password: "123456"
         database: northwind
-    postgres2:
+    pg-clubdata:
         provider: postgres
-        host: postgres2
+        host: pg-clubdata
         port: 5432
         user: admin
         password: "123456"
         database: clubdata
 
-    # input:  #ROADMAP
-    #     provider: file
-    #     directory: ./input
-    #     map: name
-
-    # metal_cache:
-    #   provider: mongodb
-    #   host: mongodb://localhost:27017/
-    #   database: metal_cache
-    #   options:
-    #     connectTimeoutMS: 5000
-    #     serverSelectionTimeoutMS: 5000
-
 schemas:
-    hr:
-        source: mssql
-        access:
-            - root@*: crud
-            - user@localhost: r
-            - any@*: r
-
-    mflix:
-        source: mongo
-
     northwind:
-        source: postgres1
-
+        source: pg-northwind
+    hr:
+        source: ms-hr
+    mflix:
+        source: mdb-mflix
     clubdata:
-        source: postgres2
-
+        source: pg-clubdata
     merge:
-        source: postgres2
+        source: pg-clubdata
         entities:
             orders:
-                source: postgres1
+                source: pg-northwind
                 entity: orders
             users:
-                source: mongo
+                source: mdb-mflix
                 entity: users
-
     plan1:
         plan: etl1
 
-    file1:
-        source: input
-
-    # cache:
-    #   source: metal_cache
-
-# schedules:
-#     - run my plan:
-#           plan: etl1
-#           entity: contact
-#           cron: "*/5 * * * * *"
-#     onsuccess: # ROADMAP
-#     onfailure: # ROADMAP
+schedules:
+    - "run entity contact of my etl1 plan":
+          plan: etl1
+          entity: contact
+          cron: "* */5 * * * *"
 
 ai-engines:
-    ocr: # Tested
+    ocr:
         engine: tesseractjs
-        # model: eng
-
-    object: # Tested
+        model: eng
+    object:
         engine: tensorflowjs
         model: object
-
-    sentiment: # Tested
+    sentiment:
         engine: nlpjs
         model: sentiment
         options:
             lang: en
-
-    guess-lang: # Tested
+    guess-lang:
         engine: nlpjs
         model: guess-lang
         options:
@@ -137,40 +102,37 @@ plans:
                   filter:
                       year: 2001
                   fields: title
-            - run: # TESTED
+            - run:
                   ai: sentiment
                   input: title
                   output:
-                    vote: sentiment
+                      vote: sentiment
         aitest:
             - debug:
             - insert:
                   data:
-                      - url: https://tesseract.projectnaptha.com/img/eng_bw.png
-                        img: https://thumbs.dreamstime.com/b/isolated-classical-guitar-photo-png-format-available-full-transparent-background-54363220.jpg
-                        msg: you suck
-                      - url: https://jeroen.github.io/images/testocr.png
-                        img: https://img.freepik.com/premium-photo/golden-retriever-lying-panting-isolated-white_191971-16974.jpg
-                        msg: i love you honey butt
-                      - url: https://www.srcmake.com/uploads/5/3/9/0/5390645/ocr_orig.png
-                        img: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPpDgjJjrakUj3VlDC0K6XtdCRu5TK7CPXr7QHVjiL&s
-                        msg: I am feeling unhappy
-            - run: # TESTED
+                      - img_to_text: https://tesseract.projectnaptha.com/img/eng_bw.png
+                        img_to_object: https://thumbs.dreamstime.com/b/isolated-classical-guitar-photo-png-format-available-full-transparent-background-54363220.jpg
+                      - img_to_text: https://jeroen.github.io/images/testocr.png
+                        img_to_object: https://img.freepik.com/premium-photo/golden-retriever-lying-panting-isolated-white_191971-16974.jpg
+                      - img_to_text: https://www.srcmake.com/uploads/5/3/9/0/5390645/ocr_orig.png
+                        img_to_object: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPpDgjJjrakUj3VlDC0K6XtdCRu5TK7CPXr7QHVjiL&s
+            - run:
                   ai: ocr
-                  input: url
+                  input: img_to_text
                   output:
                       confidence: ocr_confidence
                       text: ocr_text
-            - run: # TESTED
+            - run:
                   ai: object
-                  input: img
+                  input: img_to_object
                   output:
                       class: object
-            - run: # TESTED
+            - run:
                   ai: sentiment
                   input: ocr_text
                   output: sentiment
-            - run: # TESTED
+            - run:
                   ai: guess-lang
                   input: ocr_text
                   output:
@@ -221,13 +183,7 @@ plans:
             - insert:
                   schema: demo
                   entity: res_users
-                #   auto_create: true # ROADMAP: Auto create table
             - delete:
-                  schema: demo
-                  entity: res_users
-                  filter:
-                      lang: fr_FR
-            - update: # not tested
                   schema: demo
                   entity: res_users
                   filter:

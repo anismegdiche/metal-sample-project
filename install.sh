@@ -6,46 +6,46 @@
 docker-compose build metal
 
 #
-#   Mongodb
+#   mdb-mflix
 #
 
-chmod +x ./sample/mongodb/sample_mflix/import.sh
-docker-compose up -d mongodb
+chmod +x ./sample/mdb-mflix/sample_mflix/import.sh
+docker-compose up -d mdb-mflix
 sleep 20
-docker-compose exec mongodb /mongodb-samples/import.sh
+docker-compose exec mdb-mflix /mdb-mflix-samples/import.sh
 
 #
 #   MS SQL Server
 #
-mkdir -p mssql
-chmod 777 mssql
-chmod +x ./sample/mssql/import.sh
+mkdir -p ms-hr
+chmod 777 ms-hr
+chmod +x ./sample/ms-hr/import.sh
 
-docker-compose up -d mssql
+docker-compose up -d ms-hr
 sleep 30
-docker-compose exec mssql /mssql-samples/import.sh
+docker-compose exec ms-hr /ms-hr-samples/import.sh
 
 #
 #   Postgres 1
 #
-mkdir -p postgres1
-chown 999:0 postgres1
-chmod +x ./sample/postgres1/import.sh
+mkdir -p pg-northwind
+chown 999:0 pg-northwind
+chmod +x ./sample/pg-northwind/import.sh
 
-docker-compose up -d postgres1
+docker-compose up -d pg-northwind
 sleep 20
-docker-compose exec postgres1 /postgres1-samples/import.sh
+docker-compose exec pg-northwind /pg-northwind-samples/import.sh
 
 #
 #   Postgres 2
 #
-mkdir -p postgres2
-chown 999:0 postgres2
-chmod +x ./sample/postgres2/import.sh
+mkdir -p pg-clubdata
+chown 999:0 pg-clubdata
+chmod +x ./sample/pg-clubdata/import.sh
 
-docker-compose up -d postgres2
+docker-compose up -d pg-clubdata
 sleep 20
-docker-compose exec postgres2 /postgres2-samples/import.sh
+docker-compose exec pg-clubdata /pg-clubdata-samples/import.sh
 
 # Start the stack
 docker-compose up -d

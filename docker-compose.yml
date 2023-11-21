@@ -8,44 +8,44 @@ services:
     volumes:
       - ./metal-server/config:/metal-server/config
     depends_on:
-      - mongodb
-      - mssql
-      - postgres1
-      - postgres2
-  mongodb:
+      - mdb-mflix
+      - ms-hr
+      - pg-northwind
+      - pg-clubdata
+  mdb-mflix:
     image: mongo
-    hostname: mongodb
+    hostname: mdb-mflix
     volumes:
-      - ./mongodb:/data/db
-      - ./sample/mongodb/sample_mflix:/mongodb-samples
-  mssql:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    hostname: mssql
+      - ./mdb-mflix:/data/db
+      - ./sample/mdb-mflix/sample_mflix:/mdb-mflix-samples
+  ms-hr:
+    image: mcr.microsoft.com/ms-hr/server:2019-latest
+    hostname: ms-hr
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Azerty123!"
     volumes:
-      - ./mssql:/var/opt/mssql
-      - ./sample/mssql:/mssql-samples
-  postgres1:
+      - ./ms-hr:/var/opt/ms-hr
+      - ./sample/ms-hr:/ms-hr-samples
+  pg-northwind:
     image: postgres
-    hostname: postgres1
+    hostname: pg-northwind
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_DB: postgres
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 123456
     volumes:
-      - ./postgres1:/var/lib/postgresql/data/pgdata
-      - ./sample/postgres1:/postgres1-samples
-  postgres2:
+      - ./pg-northwind:/var/lib/postgresql/data/pgdata
+      - ./sample/pg-northwind:/pg-northwind-samples
+  pg-clubdata:
     image: postgres
-    hostname: postgres2
+    hostname: pg-clubdata
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_DB: postgres
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 123456
     volumes:
-      - ./postgres2:/var/lib/postgresql/data/pgdata
-      - ./sample/postgres2:/postgres2-samples
+      - ./pg-clubdata:/var/lib/postgresql/data/pgdata
+      - ./sample/pg-clubdata:/pg-clubdata-samples
