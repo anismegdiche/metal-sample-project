@@ -19,7 +19,7 @@ services:
       - ./mdb-mflix:/data/db
       - ./sample/mdb-mflix/sample_mflix:/mdb-mflix-samples
   ms-hr:
-    image: mcr.microsoft.com/ms-hr/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2019-latest
     hostname: ms-hr
     environment:
       ACCEPT_EULA: "Y"
