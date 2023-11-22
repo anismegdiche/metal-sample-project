@@ -58,3 +58,43 @@ services:
     volumes:
       - ./pg-clubdata:/var/lib/postgresql/data/pgdata
       - ./sample/pg-clubdata:/pg-clubdata-samples
+
+  pg-clubdata-bookings:
+    image: postgres
+    hostname: pg-clubdata-bookings
+    ports:
+      - "5434:5432"
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./pg-clubdata-bookings:/var/lib/postgresql/data/pgdata
+      - ./sample/pg-clubdata-bookings:/pg-clubdata-bookings-samples
+  pg-clubdata-facilities:
+    image: postgres
+    hostname: pg-clubdata-facilities
+    ports:
+      - "5435:5432"
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./pg-clubdata-facilities:/var/lib/postgresql/data/pgdata
+      - ./sample/pg-clubdata-facilities:/pg-clubdata-facilities-samples
+  pg-clubdata-members:
+    image: postgres
+    hostname: pg-clubdata-members
+    ports:
+      - "5436:5432"
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./pg-clubdata-members:/var/lib/postgresql/data/pgdata
+      - ./sample/pg-clubdata-members:/pg-clubdata-members-samples
