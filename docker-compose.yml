@@ -13,6 +13,9 @@ services:
       - ms-hr
       - pg-northwind
       - pg-clubdata
+      - pg-clubdata-bookings
+      - pg-clubdata-members
+      - pg-clubdata-facilities
   mdb-mflix:
     image: mongo
     hostname: mdb-mflix
