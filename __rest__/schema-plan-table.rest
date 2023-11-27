@@ -12,12 +12,6 @@ Content-Type: application/json
 @token={{login.response.body.token}}
 
 ###
-# @name plan-order-countries_order-countries
-GET http://localhost:3000/schema/db-order-countries/order-countries
-Content-Type: application/json
-authorization: Bearer {{token}}
-
-###
 # @name northwind_order-countries
 GET http://localhost:3000/schema/northwind/order-countries
 Content-Type: application/json
