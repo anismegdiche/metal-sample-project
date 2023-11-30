@@ -12,19 +12,19 @@ Content-Type: application/json
 @token={{login.response.body.token}}
 
 ###
-# @name plan-order-countries_order-countries
-GET http://localhost:3000/schema/db-order-countries/order-countries
+# @name mflix/log
+GET http://localhost:3000/schema/mflix/log
 Content-Type: application/json
 authorization: Bearer {{token}}
 
 ###
-# @name northwind_order-countries
-GET http://localhost:3000/schema/northwind/order-countries
+# @name delete_mflix_log
+DELETE http://localhost:3000/schema/mflix/log
 Content-Type: application/json
 authorization: Bearer {{token}}
 
 ###
-# @name facilities
-GET http://localhost:3000/schema/northwind/orders
+# @name clubdata/mflix_log
+GET http://localhost:3000/schema/clubdata/mflix_log
 Content-Type: application/json
 authorization: Bearer {{token}}

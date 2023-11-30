@@ -49,6 +49,12 @@ CREATE TABLE bookings (
         FOREIGN KEY (memid) REFERENCES members(memid)
 );
 
+CREATE TABLE mflix_log (
+    id SERIAL PRIMARY KEY,
+    ts VARCHAR(255),
+    message VARCHAR(255)
+);
+
 
 
 CREATE INDEX "bookings.memid_facid"
