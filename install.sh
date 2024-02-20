@@ -16,6 +16,8 @@ rm -rf      metal-server-config
 #
 docker-compose build metal
 
+./install-azurite.sh
+
 #
 #   mdb-mflix
 #

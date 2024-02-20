@@ -5,4 +5,5 @@ rm -rf \
     ms-hr \
     mdb-mflix \
     pg-northwind \
-    pg-clubdata*
+    pg-clubdata* \
+    azurite_*

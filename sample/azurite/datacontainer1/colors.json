@@ -1,0 +1,30 @@
+[
+    {
+        "color": "red",
+        "hexcode": "#f00"
+    },
+    {
+        "color": "green",
+        "hexcode": "#0f0"
+    },
+    {
+        "color": "blue",
+        "hexcode": "#00f"
+    },
+    {
+        "color": "cyan",
+        "hexcode": "#0ff"
+    },
+    {
+        "color": "magenta",
+        "hexcode": "#f0f"
+    },
+    {
+        "color": "yellow",
+        "hexcode": "#ff0"
+    },
+    {
+        "color": "black",
+        "hexcode": "#000"
+    }
+]
