@@ -1,5 +1,9 @@
 #!/bin/bash
 
+check_logs() {
+    docker-compose logs "$1" | grep -q "$2"
+}
+
 docker-compose build azurite
 
 mkdir -p azurite_data
