@@ -106,4 +106,4 @@ docker-compose exec metal npm run test-client
 
 Congratulations! You have successfully configured and verified your Metal Server Sample Project.
 
-For more configuration details and use cases, please refer to the section [Technical Guides](guides/technical-guides.md)
+For more configuration details and use cases, please refer to the section [Technical Guides](https://metal-docs-sh3b0.kinsta.page/guides/technical-guides.html)
