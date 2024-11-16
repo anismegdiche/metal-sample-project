@@ -1,6 +1,6 @@
 ##
 # Dockerfile for Metal Server
-# v0.1
+# v0.3
 ##
 
 FROM node:22
