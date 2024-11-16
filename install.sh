@@ -11,4 +11,4 @@
 ./install-pg-clubdata-members.sh
 
 # Start the stack
-docker-compose up -d
+docker compose up -d

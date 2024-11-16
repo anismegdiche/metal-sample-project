@@ -1,7 +1,7 @@
 #!/bin/bash
 
 check_logs() {
-    docker-compose logs "$1" | grep -q "$2"
+    docker compose logs "$1" | grep -q "$2"
 }
 
 #
@@ -14,4 +14,4 @@ mv          metal-server-config/__rest__                        .
 \cp -rp     metal-server/config/config-sample-docker.yml        metal-server/config/config.yml
 rm -rf      metal-server-config
 #
-docker-compose build metal
+docker compose build --no-cache metal

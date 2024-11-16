@@ -1,5 +1,5 @@
 #!/bin/bash
-docker-compose down
+docker compose down
 rm -rf \
     __rest__ \
     metal-server* \

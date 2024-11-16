@@ -1,13 +1,12 @@
-
 <img src="metal-logo.png" style="height: 100px;"/><br><span style="font-size: 1em"> `version 0.3`</span>
 
 # Metal Server Sample Project
 
 ## Overview
 
-This sample project showcases a Docker Compose stack comprising Metal Server and various Database Management System (DBMS) providers. 
+This sample project showcases a Docker Compose stack comprising Metal Server and various Database Management System (DBMS) providers.
 
-The stack comes preloaded with data, facilitating the execution and testing of diverse use cases. 
+The stack comes preloaded with data, facilitating the execution and testing of diverse use cases.
 
 The project has been tested on:
 
@@ -29,6 +28,7 @@ Here's an overview of the key services included in the stack:
 | pg-clubdata-members    | PostgreSQL Server               | postgres:latest                                                                                                            |
 | pg-clubdata-facilities | PostgreSQL Server               | postgres:latest                                                                                                            |
 | azurite                | Microsoft Azure Storage Azurite | mcr.microsoft.com/azure-storage/azurite:latest                                                                             |
+| ftp-server             | FTP Server                      | garethflowers/ftp-server:latest                                                                                            |
 
 ### Databases
 
@@ -50,14 +50,13 @@ The project includes files to be used with File Data provider:
 
 | File Name                                                                                                                  | Storage                  | Content   |
 | -------------------------------------------------------------------------------------------------------------------------- | ------------------------ | --------- |
-| [colors.json](https://github.com/anismegdiche/metal-sample-project/blob/0.2/sample/azurite/datacontainer1/colors.json)                                                                                                            | azurite (datacontainer1) | JSON data |
+| [colors.json](https://github.com/anismegdiche/metal-sample-project/blob/0.2/sample/azurite/datacontainer1/colors.json)     | azurite (datacontainer1) | JSON data |
 | [addresses.csv](https://github.com/anismegdiche/metal-sample-project/blob/0.2/sample/azurite/datacontainer1/addresses.csv) | azurite (datacontainer1) | CSV data  |
 
 ### Configuration File
 
 The project includes a readily available configuration file for seamless setup.
 [Configuration File](https://github.com/anismegdiche/metal-server/blob/main/config/config-sample-docker.yml)
-
 
 ## Prerequisites
 
@@ -72,36 +71,36 @@ Follow these steps to install the sample project:
 
 1. Clone the sample project repository:
 
-    ```bash
-    git clone https://github.com/anismegdiche/metal-sample-project.git
-    ```
+   ```bash
+   git clone https://github.com/anismegdiche/metal-sample-project.git
+   ```
 
 2. Navigate to the project directory:
 
-    ```bash
-    cd metal-sample-project
-    ```
+   ```bash
+   cd metal-sample-project
+   ```
 
 3. Change the permissions of the `install.sh` script:
 
-    ```bash
-    chmod +x *.sh
-    ```
+   ```bash
+   chmod +x *.sh
+   ```
 
 4. Run the installation script:
 
-    ```bash
-    ./install.sh
-    ```
+   ```bash
+   ./install.sh
+   ```
 
-    The stack will be up and ready after the installation process.
+   The stack will be up and ready after the installation process.
 
 ## Verification
 
 To ensure everything is set up correctly, run CRUD tests for each DBMS using the following command:
 
 ```bash
-docker-compose exec metal npm run test-client
+docker compose exec metal npm run test-client
 ```
 
 Congratulations! You have successfully configured and verified your Metal Server Sample Project.
