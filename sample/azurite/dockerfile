@@ -1,0 +1,9 @@
+FROM mcr.microsoft.com/azure-storage/azurite
+RUN apk update
+RUN apk add --update gcc python3-dev py-pip linux-headers
+RUN pip install --upgrade pip 
+RUN pip install --upgrade wheel
+RUN pip install --upgrade setuptools 
+RUN apk add --update libc-dev
+RUN pip install --upgrade psutil 
+RUN pip install azure-cli
