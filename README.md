@@ -97,7 +97,7 @@ Follow these steps to install the sample project:
 
 ## Verification
 
-To ensure everything is set up correctly, run the following command:
+To ensure everything is set up correctly, run CRUD tests for each DBMS using the following command:
 
 ```bash
 curl http://localhost:3000/server/info
@@ -106,7 +106,10 @@ curl http://localhost:3000/server/info
 You sould receive the following response:
 
 ```json
-{"server":"Metal","version":"0.3"}
+{
+   "server":"Metal",
+   "version":"0.3"
+}
 ```
 Congratulations! You have successfully configured and verified your Metal Server Sample Project.
 
