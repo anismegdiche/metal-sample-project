@@ -1,0 +1,17 @@
+
+
+FROM maven
+LABEL org.opencontainers.image.authors="Anis Megdiche <anis.megdiche@gmail.com>"
+
+RUN apt update && apt upgrade -y
+RUN apt install -y git
+
+WORKDIR /
+RUN git clone https://github.com/zjcz/sample-soap-service.git
+WORKDIR /sample-soap-service
+
+RUN mvn clean install
+
+EXPOSE 8080
+
+CMD [ "mvn", "spring-boot:run" ]

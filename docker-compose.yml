@@ -124,4 +124,10 @@ services:
       - "20-21:20-21/tcp"
       - "40000-40009:40000-40009/tcp" # Only needed for passive mode
     volumes:
-      - ./data:/home/ftpuser
+      - ./sample/ftp-server/data:/home/ftpuser
+      
+  ws-soap:
+    build: ./sample/ws-soap
+    hostname: ws-soap
+    ports:
+      - "8080:8080"
