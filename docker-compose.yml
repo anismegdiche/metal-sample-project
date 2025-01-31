@@ -15,6 +15,7 @@ services:
       - pg-clubdata-members
       - pg-clubdata-facilities
       - azurite
+
   mdb-mflix:
     image: mongo
     hostname: mdb-mflix
@@ -23,6 +24,7 @@ services:
     volumes:
       - ./mdb-mflix:/data/db
       - ./sample/mdb-mflix/sample_mflix:/mdb-mflix-samples
+
   ms-hr:
     image: mcr.microsoft.com/mssql/server:2019-latest
     hostname: ms-hr
@@ -34,6 +36,7 @@ services:
     volumes:
       - ./ms-hr:/var/opt/ms-hr
       - ./sample/ms-hr:/ms-hr-samples
+
   pg-northwind:
     image: postgres
     hostname: pg-northwind
@@ -47,6 +50,7 @@ services:
     volumes:
       - ./pg-northwind:/var/lib/postgresql/data/pgdata
       - ./sample/pg-northwind:/pg-northwind-samples
+
   pg-clubdata:
     image: postgres
     hostname: pg-clubdata
@@ -74,6 +78,7 @@ services:
     volumes:
       - ./pg-clubdata-bookings:/var/lib/postgresql/data/pgdata
       - ./sample/pg-clubdata-bookings:/pg-clubdata-bookings-samples
+
   pg-clubdata-facilities:
     image: postgres
     hostname: pg-clubdata-facilities
@@ -87,6 +92,7 @@ services:
     volumes:
       - ./pg-clubdata-facilities:/var/lib/postgresql/data/pgdata
       - ./sample/pg-clubdata-facilities:/pg-clubdata-facilities-samples
+
   pg-clubdata-members:
     image: postgres
     hostname: pg-clubdata-members
@@ -100,6 +106,7 @@ services:
     volumes:
       - ./pg-clubdata-members:/var/lib/postgresql/data/pgdata
       - ./sample/pg-clubdata-members:/pg-clubdata-members-samples
+      
   azurite:
     build: ./sample/azurite
     container_name: azurite
