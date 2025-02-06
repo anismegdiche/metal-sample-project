@@ -17,7 +17,7 @@ RUN \cp ./config/config-sample-docker.yml ./config/config.yml
 RUN npm install --loglevel verbose
 
 # typia
-RUN npm run _typia-prepare
+RUN npm run _typia-prepare || npm run typia-prepare
 
 RUN npx tsc
 
