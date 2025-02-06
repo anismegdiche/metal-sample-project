@@ -14,7 +14,7 @@ WORKDIR /metal-server
 
 RUN \cp ./config/config-sample-docker.yml ./config/config.yml
 
-RUN npm install --loglevel verbose
+RUN npm install
 
 # typia
 RUN npm run _typia-prepare || npm run typia-prepare
