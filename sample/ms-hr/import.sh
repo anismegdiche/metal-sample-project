@@ -11,4 +11,4 @@ else
 fi
 
 # Run sqlcmd with SSL trust flag (-C)
-"$SQLCMD" -S localhost -U SA -P "$SA_PASSWORD" -i /ms-hr-samples/data.sql -C
+"$SQLCMD" -S localhost -U SA -P "$MSSQL_SA_PASSWORD" -i /ms-hr-samples/data.sql -C
